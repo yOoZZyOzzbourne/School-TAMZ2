@@ -39,7 +39,6 @@ public class LevelsActivity extends AppCompatActivity {
             readLevelsFromAssets();
         } catch (IOException e) {
             e.printStackTrace();
-            // Handle error - maybe close the activity or show a message
         }
 
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, levelNames);
@@ -49,7 +48,6 @@ public class LevelsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String selectedLevelData = levelData.get(position);
-                // Intent or callback to main activity to load the selected level
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra("LEVEL_DATA", selectedLevelData);
                 setResult(Activity.RESULT_OK, resultIntent);
@@ -80,7 +78,6 @@ public class LevelsActivity extends AppCompatActivity {
             }
         }
         if (readingLevel) {
-            // Add the last level read from the file
             levelData.add(levelBuilder.toString());
         }
 

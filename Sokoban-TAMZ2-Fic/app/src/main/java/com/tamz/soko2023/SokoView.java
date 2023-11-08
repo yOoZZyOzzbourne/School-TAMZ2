@@ -62,16 +62,13 @@ public class SokoView extends View {
         super.onSizeChanged(w, h, oldw, oldh);
 
         // Calculate the height of each tile based on half the view's height
-        height = (h / 2) / lH; // We're assuming the full level fits vertically on half the screen
+        height = (h / 2) / lH;
 
-        // Assuming the level is a square, set the width to the same as the height for uniform tiles
         width = height;
 
-        // Check if the calculated tile width exceeds the view width
         if (lW * width > w) {
-            // If so, recalculate both width and height based on the view's width
             width = w / lW;
-            height = width; // Keep the tiles square
+            height = width;
         }
 
         // Scale the bitmaps to fit the new tile size
@@ -251,8 +248,8 @@ public class SokoView extends View {
 
     public int[] parseOriginalLevel(String levelString) {
         String[] rows = levelString.trim().split("\n");
-        lH = rows.length; // height of the level based on the number of rows
-        lW = 0; // find the maximum width of the level
+        lH = rows.length;
+        lW = 0;
         for (String row : rows) {
             if (row.length() > lW) {
                 lW = row.length();
@@ -260,7 +257,7 @@ public class SokoView extends View {
         }
 
         int[] originalLevel = new int[lW * lH];
-        Arrays.fill(originalLevel, 0); // Fill with empty tiles
+        Arrays.fill(originalLevel, 0);
 
         for (int y = 0; y < rows.length; y++) {
             for (int x = 0; x < rows[y].length(); x++) {
@@ -268,14 +265,14 @@ public class SokoView extends View {
                 int index = y * lW + x;
                 switch (item) {
                     case ' ': // An empty space
-                        originalLevel[index] = 0; // '0' is the empty space
+                        originalLevel[index] = 0;
                         break;
                     case '#': // Wall
-                        originalLevel[index] = 1; // '1' is the wall
+                        originalLevel[index] = 1;
                         break;
                     case '.':
                     case '*': // Goal or Box on Goal
-                        originalLevel[index] = 3; // '3' is the goal
+                        originalLevel[index] = 3;
                         break;
                 }
             }
@@ -286,8 +283,8 @@ public class SokoView extends View {
 
     public int[] parseLevel(String levelString) {
         String[] rows = levelString.trim().split("\n");
-        lH = rows.length; // height of the level based on the number of rows
-        lW = 0; // find the maximum width of the level
+        lH = rows.length;
+        lW = 0;
         for (String row : rows) {
             if (row.length() > lW) {
                 lW = row.length();
@@ -303,25 +300,25 @@ public class SokoView extends View {
                 int index = y * lW + x;
                 switch (item) {
                     case ' ': // An empty space
-                        level[index] = 0; // '0' is the empty space
+                        level[index] = 0;
                         break;
                     case '#': // Wall
-                        level[index] = 1; // '1' is the wall
+                        level[index] = 1;
                         break;
                     case '$': // Box
-                        level[index] = 2; // '2' is the box
+                        level[index] = 2;
                         break;
                     case '.': // Goal
-                        level[index] = 3; // '3' is the goal
+                        level[index] = 3;
                         break;
                     case '*': // Box on goal
-                        level[index] = 5; // '5' is the box on goal
+                        level[index] = 5;
                         break;
                     case '@': // Player
-                        level[index] = 4; // '4' is the player
+                        level[index] = 4;
                         break;
                     case '+': // Player on goal
-                        level[index] = 6; // '6' is the player on goal
+                        level[index] = 6;
                         break;
                 }
             }

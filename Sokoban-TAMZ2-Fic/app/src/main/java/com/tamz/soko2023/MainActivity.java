@@ -85,11 +85,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // Add a new method to load the level into SokoView
     private void loadLevel(String levelData) {
         if (sokoView != null) {
             sokoView.loadLevel(levelData);
-            sokoView.invalidate(); // Redraw the view with the new level
+            sokoView.invalidate();
         }
     }
     private void resetGame() {

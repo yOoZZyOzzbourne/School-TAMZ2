@@ -1,5 +1,4 @@
 Level - Tutorial
-'MINICOSMOS 01'
   #####
 ###   #
 # $ # ##
@@ -10,7 +9,6 @@ Level - Tutorial
  #####
 
 Level - Tutorial 2
-'MINICOSMOS 02'
   #####
 ###   #
 # $ # ##
@@ -20,8 +18,7 @@ Level - Tutorial 2
  #@  ###
  #####
 
-Level 1
-'PICOKOSMOS 01'
+Level 1 - PICOKOSMOS
  #####
  #   ####
  #      #
@@ -34,8 +31,7 @@ Level 1
  #  ####
  ####
 
-Level 2
-'PICOKOSMOS 02'
+Level 2 - PICOKOSMOS
        #####
      ###   #
     ## . # #
@@ -47,8 +43,7 @@ Level 2
 #  . #
 ######
 
-Level 3
-'PICOKOSMOS 03'
+Level 3 - PICOKOSMOS
    ####
    #  #
 ####  ###
@@ -60,8 +55,7 @@ Level 3
 #   ##
 #####
 
-Level 4
-'PICOKOSMOS 04'
+Level 4 - PICOKOSMOS
    ####
  ###  ##
 ## * * #
@@ -72,8 +66,7 @@ Level 4
   #  #
   ####
 
-Level 6
-'PICOKOSMOS 06'
+Level 6 - PICOKOSMOS
   ####
  ##  ###
 ##  .  #
@@ -83,8 +76,7 @@ Level 6
  #  @  ##
  #######
 
-Level 7
-'PICOKOSMOS 07'
+Level 7 - PICOKOSMOS
    #####
 ####   ##
 #  * *  #
@@ -94,8 +86,7 @@ Level 7
  #   ###
  #####
 
-Level 8
-'PICOKOSMOS 08'
+Level 8 - PICOKOSMOS
     ####
    ##  #
  ###   ####
@@ -106,8 +97,7 @@ Level 8
  #  ######
  ####
 
-Level 10
-'PICOKOSMOS 10'
+Level 10 - PICOKOSMOS
  ####
 ##  ####
 #      ##
@@ -119,8 +109,7 @@ Level 10
   ##  #
    ####
 
-Level 11
-'PICOKOSMOS 11'
+Level 11 - PICOKOSMOS
     ####
     #  ###
   ###    #
@@ -132,7 +121,7 @@ Level 11
    ####
 
 
-Level 36 - DO NOT
+Level 12 - DO NOT
 #############
 #     #     #
 # # #   # # #
