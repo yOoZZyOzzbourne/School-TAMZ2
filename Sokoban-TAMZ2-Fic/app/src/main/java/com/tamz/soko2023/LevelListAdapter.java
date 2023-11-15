@@ -48,21 +48,16 @@ public class LevelListAdapter extends ArrayAdapter<String> {
     }
 
     private Bitmap generateLevelPreview(String levelData) {
-        // Define the size of the preview and each tile within it
-        int previewSize = 100; // Example: 50x50 pixels for the entire preview
-        int tileSize = 8; // Example: Each tile in the preview is 10x10 pixels
+        int previewSize = 100; // 100x100 pix
+        int tileSize = 8; // 8x8 pix
 
-        // Parse the level data to get the grid representation
         int[] levelGrid = parseLevel(levelData);
 
-        // Scale the bitmaps for each tile type
         Bitmap[] scaledBitmaps = loadAndScaleBitmaps(getContext().getResources(), tileSize);
 
-        // Create a new bitmap for the preview
         Bitmap previewBitmap = Bitmap.createBitmap(previewSize, previewSize, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(previewBitmap);
 
-        // Draw the level on the preview bitmap
         for (int y = 0; y < lH; y++) {
             for (int x = 0; x < lW; x++) {
                 int index = y * lW + x;
@@ -84,7 +79,6 @@ public class LevelListAdapter extends ArrayAdapter<String> {
     private Bitmap[] loadAndScaleBitmaps(Resources resources, int tileSize) {
         Bitmap[] scaledBitmaps = new Bitmap[6];
 
-        // Load original bitmaps
         Bitmap[] originalBitmaps = new Bitmap[] {
                 BitmapFactory.decodeResource(resources, R.drawable.empty),
                 BitmapFactory.decodeResource(resources, R.drawable.wall),
