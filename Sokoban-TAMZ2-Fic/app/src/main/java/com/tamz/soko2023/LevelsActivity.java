@@ -41,7 +41,10 @@ public class LevelsActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, levelNames);
+//        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, levelNames);
+//        levelsListView.setAdapter(adapter);
+
+        adapter = new LevelListAdapter(this, levelNames, levelData);
         levelsListView.setAdapter(adapter);
 
         levelsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
