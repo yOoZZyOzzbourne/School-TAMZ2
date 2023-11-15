@@ -7,7 +7,10 @@ import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Rect;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -18,6 +21,7 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
+import java.util.Locale;
 
 /**
  * Created by kru13
@@ -25,6 +29,13 @@ import java.util.Arrays;
 public class SokoView extends View {
 
     Bitmap[] bmp;
+    private int moveCount;
+    private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private long startTime;
+    private long elapsedTime;
+    private boolean isTimerRunning;
+    private Handler timerHandler = new Handler();
+    private Runnable timerRunnable;
 
     int lW = 10;
     int lH = 10;
@@ -41,6 +52,19 @@ public class SokoView extends View {
         super(context);
         init(context, level);
         actualLevel = level;
+
+        timerRunnable = new Runnable() {
+            @Override
+            public void run() {
+                if (isTimerRunning) {
+                    long currentTime = System.currentTimeMillis();
+                    elapsedTime = currentTime - startTime;
+                    invalidate(); // Invalidate the view to trigger a redraw
+                }
+                timerHandler.postDelayed(this, 1000); // Schedule the runnable again after 1 second
+            }
+        };
+        timerHandler.postDelayed(timerRunnable, 1000); // Start the timer updates
     }
 
     void init(Context context, String text) {
@@ -101,10 +125,29 @@ public class SokoView extends View {
                 }
             }
         }
+
+        paint.setColor(Color.BLACK); // Set text color
+        paint.setTextSize(100); // Set text size
+        canvas.drawText("Moves: " + moveCount, 10, 80, paint); // Position the text on the canvas
+
+       if (isTimerRunning) {
+            long currentTime = System.currentTimeMillis();
+            elapsedTime = currentTime - startTime;
+            String timeString = formatTime(elapsedTime);
+            paint.setColor(Color.BLACK);
+            paint.setTextSize(100);
+            canvas.drawText("Time: " + timeString, 10, 180, paint);
+        }
     }
 
     private float x1, y1, x2, y2;
     private static final int MIN_SWIPE_DISTANCE = 150;
+
+    private String formatTime(long millis) {
+        int seconds = (int) (millis / 1000) % 60;
+        int minutes = (int) ((millis / (1000 * 60)) % 60);
+        return String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+    }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -187,6 +230,7 @@ public class SokoView extends View {
         int targetX = heroX + moveX;
         int targetY = heroY + moveY;
         int targetIndex = targetY * lW + targetX;
+        moveCount++;
 
         switch (level[targetIndex]) {
             case 0: // Empty
@@ -215,6 +259,7 @@ public class SokoView extends View {
         }
 
         if (checkWin()) {
+            stopTimer();
             Toast.makeText(getContext(), "Congratulations! You've won!", Toast.LENGTH_SHORT).show();
         }
 
@@ -243,8 +288,16 @@ public class SokoView extends View {
         actualLevel = text;
         originalLevel = parseOriginalLevel(text);
         level = parseLevel(text);
+        moveCount = 0; // Reset the move counter
+
+        startTime = System.currentTimeMillis();
+        isTimerRunning = true;
+        timerHandler.postDelayed(timerRunnable, 1000); // Start the timer updates
+
         invalidate();
     }
+
+
 
     public int[] parseOriginalLevel(String levelString) {
         String[] rows = levelString.trim().split("\n");
@@ -327,7 +380,14 @@ public class SokoView extends View {
         return level;
     }
 
-   public void reset() {
-       loadLevel(actualLevel);
-   }
+    private void stopTimer() {
+        isTimerRunning = false;
+        timerHandler.removeCallbacks(timerRunnable); // Stop the timer updates
+    }
+
+    public void reset() {
+        loadLevel(actualLevel);
+        moveCount = 0; // Reset the move counter
+        stopTimer();
+    }
 }
