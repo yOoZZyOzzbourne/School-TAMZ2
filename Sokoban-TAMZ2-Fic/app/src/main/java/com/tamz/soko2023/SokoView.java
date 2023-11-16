@@ -59,12 +59,12 @@ public class SokoView extends View {
                 if (isTimerRunning) {
                     long currentTime = System.currentTimeMillis();
                     elapsedTime = currentTime - startTime;
-                    invalidate(); // Invalidate the view to trigger a redraw
+                    invalidate();
                 }
-                timerHandler.postDelayed(this, 1000); // Schedule the runnable again after 1 second
+                timerHandler.postDelayed(this, 1000);
             }
         };
-        timerHandler.postDelayed(timerRunnable, 1000); // Start the timer updates
+        timerHandler.postDelayed(timerRunnable, 1000);
     }
 
     void init(Context context, String text) {
@@ -126,9 +126,9 @@ public class SokoView extends View {
             }
         }
 
-        paint.setColor(Color.BLACK); // Set text color
-        paint.setTextSize(100); // Set text size
-        canvas.drawText("Moves: " + moveCount, 10, 80, paint); // Position the text on the canvas
+        paint.setColor(Color.BLACK);
+        paint.setTextSize(100);
+        canvas.drawText("Moves: " + moveCount, 10, 80, paint);
 
        if (isTimerRunning) {
             long currentTime = System.currentTimeMillis();
